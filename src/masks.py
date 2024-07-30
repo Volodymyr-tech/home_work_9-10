@@ -10,7 +10,7 @@ def get_mask_card_number(card_number: str) -> str:
 def get_mask_account(account_number: str) -> str:
     """Функция возвращает замаскированный номер аккаунта"""
     if account_number.isdigit() and len(account_number) == 20:
-        masked_account = f"{'*' * 16}{account_number[-4:]}"
+        masked_account = f"**{account_number[-4:]}"
         return masked_account
     else:
         raise ValueError("Ошибка! Номер карты должен состоять из 20 цифр без пробелов.")
