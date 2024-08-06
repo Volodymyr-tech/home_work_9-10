@@ -10,9 +10,9 @@ def mask_account_card(users_input: str) -> str:
     for item in users_input_list:
         if item.isalpha():
             name_account_parts.append(item)
-        elif item.isdigit and len(item) == 20:
+        elif item.isdigit() and len(item) == 20:
             masked_account = get_mask_account(item)
-        elif item.isdigit and len(item) == 16:
+        elif item.isdigit() and len(item) == 16:
             masked_account = get_mask_card_number(item)
 
         name_account = ' '.join(name_account_parts)
@@ -38,5 +38,3 @@ def get_date(current_date: str) -> str:
 data = "2024-03-11T02:26:18.671407"
 result = get_date(data)
 print(result)
-
-q
