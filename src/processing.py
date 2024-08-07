@@ -18,3 +18,15 @@ def filter_by_state(data: list, state: str = "EXECUTED") -> list:
 
 result = filter_by_state(data_to_process)
 print(result)
+
+
+def filter_by_state(data: list, state: str = "EXECUTED") -> list:
+    '''Функция возврата нового списока, отсортированного по дате'''
+    for status in data:
+        if status.get("state") == state:
+            new_data.append(status)
+    return new_data
+
+
+result_date = filter_by_state(data_to_process)
+print(result)
