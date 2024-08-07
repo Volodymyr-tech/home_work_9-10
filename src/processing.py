@@ -20,13 +20,12 @@ result = filter_by_state(data_to_process)
 print(result)
 
 
-def filter_by_state(data: list, state: str = "EXECUTED") -> list:
-    '''Функция возврата нового списока, отсортированного по дате'''
-    for status in data:
-        if status.get("state") == state:
-            new_data.append(status)
-    return new_data
+def sort_by_date(sorted_date: list, reverse_date: bool = True) -> list:
+    sorted_date_list = sorted(
+        sorted_date, key=lambda x: x["date"], reverse=reverse_date
+    )
+    return sorted_date_list
 
 
-result_date = filter_by_state(data_to_process)
-print(result)
+result_sorted = sort_by_date(new_data)
+print(result_sorted)
