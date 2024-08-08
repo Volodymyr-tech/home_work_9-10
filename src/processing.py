@@ -21,6 +21,7 @@ print(result)
 
 
 def sort_by_date(sorted_date: list, reverse_date: bool = True) -> list:
+    '''Функция для сортировки списка словарей по дате'''
     sorted_date_list = sorted(
         sorted_date, key=lambda x: x["date"], reverse=reverse_date
     )
