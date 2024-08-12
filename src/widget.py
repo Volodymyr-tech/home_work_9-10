@@ -15,26 +15,17 @@ def mask_account_card(users_input: str) -> str:
         elif item.isdigit() and len(item) == 16:
             masked_account = get_mask_card_number(item)
 
-        name_account = ' '.join(name_account_parts)
+        name_account = " ".join(name_account_parts)
 
-    return f'{name_account}  {masked_account} '
-
-
-user = input()
-print(mask_account_card(user))
+    return f"{name_account} {masked_account}"
 
 
 def get_date(current_date: str) -> str:
-    '''Функция для возврата корректного формата даты'''
-    date_part = current_date.split('T')[0]
+    """Функция для возврата корректного формата даты"""
+    date_part = current_date.split("T")[0]
 
-    year, month, day = date_part.split('-')
+    year, month, day = date_part.split("-")
 
     formatted_date = f"{day}.{month}.{year}"
 
     return formatted_date
-
-
-data = "2024-03-11T02:26:18.671407"
-result = get_date(data)
-print(result)

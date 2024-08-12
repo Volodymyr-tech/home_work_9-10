@@ -1,9 +1,9 @@
 # main.py
 
-from src.masks import get_mask_card_number, get_mask_account
+from src.masks import get_mask_account, get_mask_card_number
 
 
-def main():
+def main() -> None:
     user_input = input("Введите номер банковской карты (16 цифр): ")
     try:
         result = get_mask_card_number(user_input)
