@@ -9,7 +9,6 @@ packages = [{include = "homework_9"}]
 [tool.poetry.dependencies]
 python = "^3.12"
 pytest = "^8.3.2"
-pytest-lazy-fixture = "^0.6.3"
 
 
 [tool.poetry.group.lint.dependencies]
