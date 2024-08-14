@@ -2,16 +2,13 @@ import random
 from typing import Any, Dict, Iterator, List
 
 
-def filter_by_currency(dict_list: List[Dict[str, Any]], corrency: str) -> Iterator:
+def filter_by_currency(dict_list: List[Dict[str, Any]], currency: str) -> Iterator:
     """Функция для вывода валюты транзакции"""
     for operation in dict_list:
-        if "operationAmount" and corrency in operation:
- #           input_currency = operation["operationAmount"]["currency"]["name"]
+        if "operationAmount" in operation and operation["operationAmount"]["currency"]["name"] == currency:
+            #           input_currency = operation["operationAmount"]["currency"]["name"]
             yield operation
-        else:
-            raise KeyError
 
-        break
 
 
 def transaction_descriptions(dict_transaction: List[Dict[str, Any]]) -> Iterator[str]:
@@ -20,8 +17,6 @@ def transaction_descriptions(dict_transaction: List[Dict[str, Any]]) -> Iterator
         if "description" in info:
             description = info["description"]
             yield description
-        else:
-            raise KeyError
 
 
 def card_number_generator(start: int, stop: int) -> Iterator:
