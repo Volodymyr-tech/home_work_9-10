@@ -1,6 +1,5 @@
 import pytest
 from src.decorators import log
-from unittest.mock import patch
 
 
 def test_log_decorator(tmpdir):
@@ -37,7 +36,7 @@ def test_raise_error(tmpdir):
     with open(error_info, 'r', encoding='utf-8') as file:
         content = file.read()
 
-        assert 'result error: ValueError. Inputs: (10, 0), {}'
+        assert 'result error: ZeroDivisionError. Inputs: (10, 0), {}\n' in content
 
 
 
