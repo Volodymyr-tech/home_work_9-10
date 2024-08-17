@@ -4,6 +4,7 @@ logging.basicConfig(level=logging.INFO)
 
 
 def log(filename=None):
+    '''Декоратор для записи выполнения функции в лог файл при наличии имя файла, если параметр None результат работы выводится в консоль'''
     def decorator(function):
         def wrapper(*args, **kwargs):
             log_message = (

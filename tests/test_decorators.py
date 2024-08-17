@@ -3,6 +3,7 @@ from src.decorators import log
 
 
 def test_log_decorator(tmpdir):
+    '''Тест записи коректного выполнения функции в лог файл'''
     log_info = tmpdir.join('test_log.txt')
 
     @log(log_info)
@@ -20,6 +21,7 @@ def test_log_decorator(tmpdir):
 
 
 def test_log_raise_error(tmpdir):
+    '''Тест записи некоректного выполнения функции в лог файл'''
     error_info = tmpdir.join('test_eror_log.txt')
 
     @log(error_info)
@@ -40,6 +42,7 @@ def test_log_raise_error(tmpdir):
 
 
 def test_log_capsys(capsys):
+    '''Тест вывода коректного выполнения функции в лог файл'''
     @log()
     def greet():
         return 'Hello'
@@ -54,6 +57,7 @@ def test_log_capsys(capsys):
     assert captured.out == expected_output
 
 def test_log_capsys_error(capsys):
+    '''Тест вывода некоректного выполнения функции в лог файл'''
     @log()
     def result(x, y):
         if y == 0:
