@@ -14,7 +14,7 @@ def log(filename=None):
                 result = function(*args, **kwargs)
 
                 if filename:
-                    with open(filename, 'w', encoding='utf-8') as file:
+                    with open(filename, 'a', encoding='utf-8') as file:
                         file.write(log_message + "-" * 40 + "\n")
                 else:
                     print(log_message)
@@ -25,23 +25,13 @@ def log(filename=None):
                 error_message = f"{function.__name__} error: {e.__class__.__name__}. Inputs: {args}, {kwargs}\n"
 
                 if filename:
-                    with open(filename, "w", encoding='utf-8') as file:
+                    with open(filename, "a", encoding='utf-8') as file:
                         file.write(error_message)
                 else:
                     print(error_message)
 
-                return None  # Возвращаем None, чтобы не зацикливать вызов wrapper
+                raise
 
         return wrapper
 
     return decorator
-
-
-@log('log_file.txt')
-def result(x, y):
-    nums = x / y
-    return nums
-
-
-# Вызов функции для теста
-result(10, 2)
