@@ -22,7 +22,7 @@ def log(filename=None):
                 return result  # Добавляем возврат результата выполнения функции
 
             except Exception as e:
-                error_message = f"{function.__name__} error: {e.__class__.__name__}. Inputs: {args}, {kwargs}\n"
+                error_message = f"{function.__name__} error: {e.__class__.__name__}.Inputs: {args}, {kwargs}\n"
 
                 if filename:
                     with open(filename, "a", encoding='utf-8') as file:
