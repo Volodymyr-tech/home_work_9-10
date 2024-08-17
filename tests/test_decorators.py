@@ -39,7 +39,7 @@ def test_log_raise_error(tmpdir):
     with open(error_info, "r", encoding="utf-8") as file:
         content = file.read()
 
-        assert "result error: ZeroDivisionError. Inputs: (10, 0), {}\n" in content
+        assert "result error: ZeroDivisionError.Inputs: (10, 0), {}\n" in content
 
 
 def test_log_capsys(capsys):
