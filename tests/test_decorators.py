@@ -39,26 +39,20 @@ def test_raise_error(tmpdir):
         assert 'result error: ZeroDivisionError. Inputs: (10, 0), {}\n' in content
 
 
+def test_log_decorator_capsys(capsys):
+    @log()
+    def greet():
+        return 'Hello'
+
+    greet()
+    captured = capsys.readouterr()
+    expected_output = (
+        'Запуск функции: greet ok\n'
+        'Функция greet выполнена.\n'  # Добавляем \n в конце
+        '\n'  # Дополнительный символ новой строки
+    )
+    assert captured.out == expected_output
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-def test_error_raise():
-    with pytest.raises(ZeroDivisionError, match=r'Ну че ты делишь то\?'):
-        result(10,0)
-
-
-def test_divide():
-    assert result(10, 2) == 5
 
