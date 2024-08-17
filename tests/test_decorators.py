@@ -19,7 +19,7 @@ def test_log_decorator(tmpdir):
         assert 'Функция greet выполнена.' in content
 
 
-def test_raise_error(tmpdir):
+def test_log_raise_error(tmpdir):
     error_info = tmpdir.join('test_eror_log.txt')
 
     @log(error_info)
@@ -39,7 +39,7 @@ def test_raise_error(tmpdir):
         assert 'result error: ZeroDivisionError. Inputs: (10, 0), {}\n' in content
 
 
-def test_log_decorator_capsys(capsys):
+def test_log_capsys(capsys):
     @log()
     def greet():
         return 'Hello'
@@ -53,6 +53,20 @@ def test_log_decorator_capsys(capsys):
     )
     assert captured.out == expected_output
 
+def test_log_capsys_error(capsys):
+    @log()
+    def result(x, y):
+        if y == 0:
+            raise ZeroDivisionError('Ну че ты делишь то?')
+        else:
+            nums = x / y
+            return nums
 
+    with pytest.raises(ZeroDivisionError):
+        result(10, 0)
+
+    captured = capsys.readouterr()
+    expected_output = ('result error: ZeroDivisionError.Inputs: (10, 0), {}\n\n')
+    assert captured.out == expected_output
 
 
