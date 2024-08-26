@@ -1,4 +1,5 @@
 import pytest
+
 from src.utils import json_reader
 
 
@@ -35,7 +36,7 @@ def test_getsize_json_reader(tmpdir, empty_list):
 
 def test_not_isinstance_json_reader(tmpdir, empty_list, dictionary):
     file = tmpdir.join("test.json")
-    with open(file, "w", encoding="utf-8") as f:
+    with open(file, "w", encoding="utf-8") as file:
         file.write(dictionary)
 
     result = json_reader(str(file))
