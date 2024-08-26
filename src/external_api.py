@@ -39,7 +39,7 @@ def convert(transactions):
                 if status_code == 200:
                     result = response.json()
 
-                    yield f'Сумма в рублях: {float(result["result"])}, курс:{result["info"]["rate"]}'
+                    yield f'Сумма в рублях: {float(result["result"])}' #, курс:{result["info"]["rate"]}'
 
             except requests.exceptions.ConnectionError:
                 print("Connection Error. Please check your network connection.")
