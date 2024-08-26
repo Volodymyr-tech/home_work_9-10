@@ -1,6 +1,6 @@
 import json
 import os.path
-from typing import Any, Dict, Iterator, List
+from typing import Any, Dict, List
 
 PATH = r"C:\Users\Владимир\PycharmProjects\homework_9.1\data\operations.json"
 
