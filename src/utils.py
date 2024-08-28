@@ -5,7 +5,7 @@ import logging
 
 logger = logging.getLogger('utils')
 file_handler = logging.FileHandler(r'C:\Users\Владимир\PycharmProjects\homework_9.1\logs\utils.log', encoding='utf-8')
-file_formatter = logging.Formatter('%(asctime)s %(levelname)s: %(message)s')
+file_formatter = logging.Formatter('%(asctime)s %(name)s %(levelname)s: %(message)s')
 file_handler.setFormatter(file_formatter)
 logger.addHandler(file_handler)
 
@@ -20,6 +20,7 @@ def json_reader(path: str) -> List[Dict[str, Any]]:
     logger.info('Проверяю, что файл существует')
     if not os.path.isfile(path):
         return []
+
     logger.info('Проверяю, файл не пустой')
     if os.path.getsize(path) == 0:
         return []
@@ -34,7 +35,3 @@ def json_reader(path: str) -> List[Dict[str, Any]]:
 
         logger.info('Программа завершена')
         return output_data
-
-
-if __name__ == '__main__':
-    json_reader(PATH)
