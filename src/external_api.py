@@ -53,3 +53,4 @@ if __name__ == "__main__":
 
     # Получаем первую транзакцию
     print(next(result_generator))
+    print(next(result_generator))
