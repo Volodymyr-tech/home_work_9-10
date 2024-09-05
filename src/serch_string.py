@@ -3,6 +3,7 @@ from collections import Counter
 
 
 def filter_by_description(data: list, pattern: str) -> list:
+    """ Функция возвращающая список словарей, у которых в описании есть заданная строка."""
     result = []
     for item in data:
         # Проверяем поле 'description' на вхождение слова по регулярному выражению
@@ -13,8 +14,8 @@ def filter_by_description(data: list, pattern: str) -> list:
 
 
 def count_operations_by_category(data_list: list, categories: list) -> dict:
-
-    category_count = Counter() #{category: 0 for category in categories}
+    """Функция возвращает словарь, в котором ключи — это названия категорий, а значения — это количество операций в каждой категории."""
+    category_count = Counter() # альтернатива - генератор словарей {category: 0 for category in categories}
 
     for operation in data_list:
         description = operation.get('description','')
