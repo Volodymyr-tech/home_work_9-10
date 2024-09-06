@@ -94,7 +94,7 @@ def main() -> None:
 
         if user_currency in ['да', 'нет']:
             if user_currency == 'да':
-                filtered_by_currency = filter_by_currency(sorted_by_date, 'RUB')
+                filtered_by_currency = list(filter_by_currency(sorted_by_date, 'RUB'))
                 break
             elif user_currency == 'нет':
                 filtered_by_currency = sorted_by_date
@@ -111,14 +111,14 @@ def main() -> None:
                 sorted_by_word = filter_by_description(filtered_by_currency, search_word)
                 break
             elif filter_by_word == 'нет':
-                sorted_by_word = filtered_by_currency
+                sorted_by_word = list(filtered_by_currency)
                 break
-            else:
-                search_word = input(f'Ваш ввод {filter_by_word} не поддерживается. Введите "Да/Нет" ').lower()
+        else:
+            filter_by_word = input(f'Ваш ввод {filter_by_word} не поддерживается. Введите "Да/Нет" ').lower()
 
     print('Распечатываю итоговый список транзакций...')
 
-    print(type(filter_by_word))
+    print(type(sorted_by_word))
 
 
 
