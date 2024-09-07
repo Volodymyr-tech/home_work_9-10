@@ -5,10 +5,10 @@ from typing import Any, Dict, Iterator, List
 def filter_by_currency(dict_list: List[Dict[str, Any]], currency: str) -> Iterator:
     """Функция для вывода валюты транзакции"""
     for operation in dict_list:
-        if "operationAmount" in operation and operation["operationAmount"]["currency"]["name"] == currency:
-            #           input_currency = operation["operationAmount"]["currency"]["name"]
+        if "operationAmount" in operation and operation["operationAmount"]["currency"]["code"] == currency:
             yield operation
-
+        elif operation['currency_code'] == 'RUB':
+            yield operation
 
 def transaction_descriptions(dict_transaction: List[Dict[str, Any]]) -> Iterator[str]:
     """Функция для возврата описания транзакции"""

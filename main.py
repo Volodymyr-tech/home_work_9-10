@@ -1,5 +1,5 @@
 import re
-
+from src.widget import get_date, mask_account_card
 from src.utils import json_reader
 from src.processing import filter_by_state, sort_by_date
 from src.generators import filter_by_currency, transaction_descriptions
@@ -27,11 +27,12 @@ def main() -> None:
                 if user_status in ['EXECUTED', 'CANCELED', 'PENDING']:
                     json_data = json_reader(file_json)
                     filtered_by_state = filter_by_state(json_data, user_status)
+                    print(filtered_by_state)
                     break
 
                 else:
                     print(f'Статус операции {user_status} недоступен')
-                    user_status = input('Пожалуйста, введите корректный статус (EXECUTED, CANCELED, PENDING): ').upper()
+
 
             elif user_input == 2:
                 print('Для обработки выбран CSV-файл.')
@@ -39,12 +40,14 @@ def main() -> None:
 
                 if user_status in ['EXECUTED', 'CANCELED', 'PENDING']:
                     csv_data = reader_csv(file_csv)
+                    print(csv_data)
                     filtered_by_state = filter_by_state(csv_data, user_status)
+                    print(filtered_by_state)
                     break
 
                 else:
                     print(f'Статус операции {user_status} недоступен')
-                    user_status = input('Пожалуйста, введите корректный статус (EXECUTED, CANCELED, PENDING): ').upper()
+
 
 
             elif user_input == 3:
@@ -54,11 +57,12 @@ def main() -> None:
                 if user_status in ['EXECUTED', 'CANCELED', 'PENDING']:
                     xlsx_data = pandas_reader_xlsx(file_xlsx)
                     filtered_by_state = filter_by_state(xlsx_data, user_status)
+                    print(filtered_by_state)
                     break
 
                 else:
                     print(f'Статус операции {user_status} недоступен')
-                    user_status = input('Пожалуйста, введите корректный статус (EXECUTED, CANCELED, PENDING): ').upper()
+
 
         else:
             print('Некорректный выбор. Пожалуйста, выберите 1, 2 или 3.')
@@ -69,19 +73,18 @@ def main() -> None:
         if user_sort == 'да':
             user_bool = input('Программа: Отсортировать по возрастанию или по убыванию? ')
 
-            false_sort = r'по\s+возрастанию'
-            true_sort = r'по\s+убыванию'
-
-            if re.search(true_sort, user_bool):
+            if 'убыванию' in user_bool:
                 sorted_by_date = sort_by_date(filtered_by_state, True)
+                print(sorted_by_date)
                 break
-
-            elif re.search(false_sort, user_bool):
+            elif 'возрастанию' in user_bool:
                 sorted_by_date = sort_by_date(filtered_by_state, False)
+                print(sorted_by_date)
                 break
 
         elif user_sort == 'нет':
             sorted_by_date = filtered_by_state
+            print(sorted_by_date)
             break
 
 
@@ -95,9 +98,11 @@ def main() -> None:
         if user_currency in ['да', 'нет']:
             if user_currency == 'да':
                 filtered_by_currency = list(filter_by_currency(sorted_by_date, 'RUB'))
+                print(filtered_by_currency)
                 break
             elif user_currency == 'нет':
                 filtered_by_currency = sorted_by_date
+                print(filtered_by_currency)
                 break
         else:
             user_currency = input(f'Ващ ввод {user_currency} не поддерживается. Введите "Да/Нет" ').lower()
@@ -111,63 +116,35 @@ def main() -> None:
                 sorted_by_word = filter_by_description(filtered_by_currency, search_word)
                 break
             elif filter_by_word == 'нет':
-                sorted_by_word = list(filtered_by_currency)
+                sorted_by_word = filtered_by_currency
                 break
         else:
             filter_by_word = input(f'Ваш ввод {filter_by_word} не поддерживается. Введите "Да/Нет" ').lower()
 
     print('Распечатываю итоговый список транзакций...')
 
-    print(type(sorted_by_word))
+    print(sorted_by_word)
 
+    if len(sorted_by_word) == 0:
+        print("Не найдено ни одной транзакции, подходящей под ваши условия фильтрации")
+    else:
+        print(f"Всего банковских операций в выборке: {len(sorted_by_word)}")
+        print(" ")
 
-
-
-
-        #
-        #
-        #
-        #     if re.search(true_sort, user_bool, re.IGNORECASE):
-        #         sorted_by_date = sort_by_date(filtered_by_state, True)
-        #
-        #     elif re.search(false_sort, user_bool):
-        #         sorted_by_date = sort_by_date(filtered_by_state, False)
-        #
-        #     else:
-        #         print('Некорректный ввод для сортировки. Выход.')
-        #
-        #
-
-        #         return
-        #
-        # word_filter = input('Программа: Отфильтровать список транзакций по определенному слову в описании? Да/Нет ').lower()
-        #
-        # if word_filter == 'да':
-        #     description_data = list(transaction_descriptions(filtered_currency))
-        #     print(f"Транзакции после фильтрации по описанию: {description_data}")
-        #     if not description_data:
-        #         print("Нет транзакций с таким описанием.")
-        #         return
-        #
-        #     print('Программа: Распечатываю итоговый список транзакций...')
-        #     for description in description_data:
-        #         print(description)
-        # else:
-        #     print('Программа: Распечатываю список транзакций без фильтрации по описанию...')
-        #     for transaction in filtered_currency:
-        #         print(transaction)
-        #
-        # # else:
-        # #     print('Сортировка не выполнена. Выход.')
-        # #
-        # # elif user_input == 2:
-        # #     print('Для обработки выбран CSV-файл')
-        # #     # Действия для работы с CSV
-        # #
-        # # elif user_input == 3:
-        # #     print('Для обработки выбран XLSX-файл')
-        # #     # Действия для работы с XLSX
-
+        for i in sorted_by_word:
+            print(f"{get_date(i['date'])} {str(i['description'])}")
+            if i["description"] == "Открытие вклада":
+                print(f"Счет: {mask_account_card(i['to'])}")
+                print(f"Сумма: {i['operationAmount'].get('amount')}\n")
+            elif i["description"] == "Перевод организации":
+                print(f"{mask_account_card(str(i['from']))} -> {mask_account_card(str(i['to']))}")
+                print(f"Сумма: {i['operationAmount'].get('amount')}\n")
+            elif i["description"] == "Перевод с карты на карту":
+                print(f"{mask_account_card(str(i['from']))} -> {mask_account_card(str(i['to']))}")
+                print(f"Сумма: {i['operationAmount'].get('amount')}\n")
+            elif i["description"] == "Перевод со счета на счет":
+                print(f"{mask_account_card(str(i['from']))} -> {mask_account_card(str(i['to']))}")
+                print(f"Сумма: {i['operationAmount'].get('amount')}\n")
 
 if __name__ == "__main__":
     main()

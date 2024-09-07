@@ -44,13 +44,3 @@ def convert(transactions):
             except requests.exceptions.ConnectionError:
                 print("Connection Error. Please check your network connection.")
 
-
-if __name__ == "__main__":
-    transactions = json_reader(PATH)
-
-    # Создаём генератор
-    result_generator = convert(transactions)
-
-    # Получаем первую транзакцию
-    print(next(result_generator))
-    print(next(result_generator))
