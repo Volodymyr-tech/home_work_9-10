@@ -1,4 +1,4 @@
-def filter_by_state(data: list, state: str = None) -> list:
+def filter_by_state(data: list, state: None) -> list:
     """Функция возвращающая список словарей по ключу State"""
     new_data = []
     for status in data:
@@ -11,6 +11,3 @@ def sort_by_date(sorted_date: list, reverse_date: bool = False) -> list:
     """Функция для сортировки списка словарей по дате"""
     sorted_date_list = sorted(sorted_date, key=lambda x: x["date"], reverse=reverse_date)
     return sorted_date_list
-
-
-
