@@ -3,8 +3,6 @@ import os
 import requests
 from dotenv import load_dotenv
 
-from src.utils import json_reader
-
 load_dotenv()
 PATH = r"C:\Users\Владимир\PycharmProjects\homework_9.1\data\operations.json"
 path_log = r"C:\Users\Владимир\PycharmProjects\homework_9.1\data\api_response.log"
@@ -43,14 +41,3 @@ def convert(transactions):
 
             except requests.exceptions.ConnectionError:
                 print("Connection Error. Please check your network connection.")
-
-
-if __name__ == "__main__":
-    transactions = json_reader(PATH)
-
-    # Создаём генератор
-    result_generator = convert(transactions)
-
-    # Получаем первую транзакцию
-    print(next(result_generator))
-    print(next(result_generator))

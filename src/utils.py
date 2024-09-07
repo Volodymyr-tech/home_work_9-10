@@ -32,6 +32,6 @@ def json_reader(path: str) -> List[Dict[str, Any]]:
         logger.info("Проверяю, что файл содержит список")
         if not isinstance(output_data, list):
             return []
-
+        logger.info(f"Содержимое файла: {output_data}")
         logger.info("Программа завершена")
         return output_data
